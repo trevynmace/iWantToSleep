@@ -17,14 +17,26 @@ public class Character : MonoBehaviour
 	
 	void Update () 
 	{
-	    //TODO: need to add controls for character and see how the gravity vs ground works.... hopefully like it normally would be expected to work
-		if (Input.GetKeyDown (KeyCode.LeftArrow)) 
-		{
-			GameObject character = GameObject.Find("character");
-			var x = character.transform.position.x;
-			var y = character.transform.position.y;
+        GameObject character = GameObject.Find("character");
+        //Rigidbody2D rb = character.GetComponent<Rigidbody2D>();
 
-			character.transform.position = new Vector3 (x - 0.5f, y, 1);
-		}
+        var moveSpeed = 2f;
+	    var jumpPower = 6f;
+
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            //rb.MovePosition(rb.position + new Vector2(rb.position.x + 2, rb.position.y) * Time.deltaTime);
+            character.transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        }
+	    if (Input.GetKey(KeyCode.LeftArrow))
+	    {
+            //rb.MovePosition(rb.position + new Vector2(rb.position.x - 2, rb.position.y) * Time.deltaTime);
+            transform.Translate(-Vector2.right * moveSpeed * Time.deltaTime);
+        }
+
+	    if (Input.GetKey(KeyCode.Space))
+	    {
+	        character.transform.Translate(Vector3.up * jumpPower * Time.deltaTime);
+	    }
 	}
 }
